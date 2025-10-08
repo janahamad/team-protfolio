@@ -1,0 +1,21 @@
+# Ignore Docker configuration files
+Dockerfile
+docker-compose.yml
+
+# Ignore build artifacts or temporary files (optional but recommended)
+*.log
+*.tmp
+*.bak
+
+# Ignore OS/system files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE/project settings
+.vscode/
+.idea/
+*.swp
+
+# Ignore dependency or package directories (if any in the future)
+node_modules/
+vendor/
