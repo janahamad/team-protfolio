@@ -19,3 +19,5 @@ Thumbs.db
 # Ignore dependency or package directories (if any in the future)
 node_modules/
 vendor/
+
+backend/.env

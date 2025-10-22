@@ -1,58 +1,115 @@
-# 🌟 Team Portfolio Landing Page
+# 🧱 Team Portfolio Project
 
-A simple **portfolio landing page** built with **HTML + CSS** — designed to showcase the work of four team members: **Jana, Rana, Manar, and Shatha**.
-
-This static site acts as a central hub to display each member’s profile, roles, and project links (like LinkedIn, GitHub, or personal websites).  
-It’s lightweight and can be hosted easily on GitHub Pages, Netlify, or any web server.
+A full-stack web application built with **React (Vite)** for the frontend and **Node.js (Express)** for the backend.  
+This app is containerized with **Docker** and orchestrated using **Docker Compose**, making it easy to deploy and maintain.
 
 ---
 
-## 🧱 Project Structure
-<pre style="background:none; border:none; padding:0; font-size:14px; line-height:1.4;">
+## 📁 Project Structure
+
 team-portfolio/
-├── index.html                     # Landing page: hero, team grid, highlights
-├── members/
-│   ├── jana.html                  # Jana's personal profile page
-│   ├── rana.html                  # Rana's personal profile page
-│   ├── manar.html                 # Manar's personal profile page
-│   └── shatha.html                # Shatha's personal profile page
-├── projects/
-│   └── project-template.html      # (Optional) Single project detail template
-├── assets/
-│   ├── css/
-│   │   ├── reset.css              # CSS reset/normalize (optional)
-│   │   ├── variables.css          # Colors, fonts, spacing tokens
-│   │   ├── base.css               # Base styles (typography, layout, grid)
-│   │   ├── components.css         # Buttons, cards, navbar, avatars, etc.
-│   │   └── pages.css              # Page-specific styles (home & member pages)
-│   ├── img/
-│   │   ├── avatars/               # Team member avatars (JPG/PNG/SVG)
-│   │   ├── logos/                 # Placeholder team/company logo
-│   │   └── projects/              # Thumbnails for showcased projects
-│   ├── fonts/                     # (Optional) self-hosted webfonts
-│   └── icons/                     # (Optional) SVG icons (LinkedIn, GitHub, etc.)
-├── assets-static/                 # (Optional) downloads, PDFs, resumes
-│   └── jana-resume.pdf
-├── favicon.ico                    # (Optional) site icon
-├── manifest.webmanifest           # (Optional) PWA/meta info
-└── 404.html                       # (Optional) custom not-found page
-</pre>
+├── frontend/ # React app (Vite)
+│ ├── src/ # React components, assets, and logic
+│ ├── public/ # Static files
+│ ├── old-html/ # Legacy static design (for reference)
+│ ├── Dockerfile # Frontend container build file
+│ ├── package.json # Frontend dependencies and scripts
+│ ├── vite.config.js # Vite configuration
+│ └── .env # Frontend environment variables (VITE_API_URL)
+│
+├── backend/ # Node.js / Express API
+│ ├── src/
+│ │ └── server.js # Main Express server entry point
+│ ├── Dockerfile # Backend container build file
+│ ├── package.json # Backend dependencies and scripts
+│ └── .env # Backend environment variables (PORT, DB, etc.)
+│
+├── docker-compose.yml # Runs both frontend and backend containers
+├── .gitignore # Ignores node_modules, .env, etc.
+└── README.md # Project documentation (you’re reading it!)
 
 
-## 🖥️ Pages Overview
+---
 
-## 🎨 Design Overview
+## 🚀 Quick Start (Using Docker)
 
-## 🧩 Technologies Used
+### 1. Build and Run the Stack
+From the project root:
+```bash
+docker compose build
+docker compose up -d
 
-## 🚀 Getting Started
+2. Access the App
+Service  	URL	                   Description
+Frontend	http://localhost:3010      React web interface
+Backend         http://localhost:4210      Express API endpoint
 
-👥 Team Members
 
-Member	Role	LinkedIn
-| Member | Role                | LinkedIn                         |
-| ------ | ------------------- | -------------------------------- |
-| Jana   | Front-End Developer | [LinkedIn](https://linkedin.com) |
-| Rana   | Back-End Developer  | [LinkedIn](https://linkedin.com) |
-| Manar  | UI/UX Designer      | [LinkedIn](https://linkedin.com) |
-| Shatha | Project Manager     | [LinkedIn](https://linkedin.com) |
+## ⚙️ Environment Variables
+
+Frontend (frontend/.env)
+VITE_API_URL=http://backend:8200
+Used by Vite to communicate with the backend API (internal Docker network).
+
+
+
+Backend (backend/.env)
+PORT=8200
+NODE_ENV=development
+FRONTEND_URL=http://localhost:3010
+
+
+## 🧑‍💻 Developer Guide
+1. Local Development (without Docker)
+
+Run backend:
+cd backend
+npm install
+npm start
+
+
+
+Run frontend:
+cd frontend
+npm install
+npm run dev
+
+
+
+Visit:
+
+Frontend → http://localhost:5173
+Backend → http://localhost:4210
+
+| Endpoint       | Method | Description              |
+| -------------- | ------ | ------------------------ |
+| `/`            | GET    | Health check             |
+| `/api/members` | GET    | Returns team member data |
+
+
+
+3. Code Formatting & Linting
+
+To keep the code clean:
+npm run lint
+
+
+4. Folder Naming Rules
+
+Keep React components under frontend/src/components/.
+
+Use lowercase for backend filenames (e.g., server.js, routes.js).
+
+Store all secrets in .env (never commit these to Git).
+
+
+
+
+## 🧠 Tech Stack
+
+| Layer            | Technology                          |
+| ---------------- | ----------------------------------- |
+| Frontend         | React (Vite), HTML, CSS, JavaScript |
+| Backend          | Node.js, Express                    |
+| Containerization | Docker, Docker Compose              |
+| Reverse Proxy    | Nginx (inside frontend image)       |
