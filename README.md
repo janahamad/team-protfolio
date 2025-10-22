@@ -6,7 +6,7 @@ This app is containerized with **Docker** and orchestrated using **Docker Compos
 ---
 
 ## 📁 Project Structure
-
+```bash
 team-portfolio/
 ├── frontend/ # React app (Vite)
 │ ├── src/ # React components, assets, and logic
@@ -26,9 +26,9 @@ team-portfolio/
 │
 ├── docker-compose.yml # Runs both frontend and backend containers
 ├── .gitignore # Ignores node_modules, .env, etc.
-└── README.md # Project documentation (you’re reading it!)
+└── README.md # Project documentation
 
-
+```
 ---
 
 ## 🚀 Quick Start (Using Docker)
@@ -38,7 +38,7 @@ From the project root:
 ```bash
 docker compose build
 docker compose up -d
-
+```
 2. Access the App
 Service  	URL	                   Description
 Frontend	http://localhost:3010      React web interface
@@ -48,33 +48,39 @@ Backend         http://localhost:4210      Express API endpoint
 ## ⚙️ Environment Variables
 
 Frontend (frontend/.env)
+```bash
 VITE_API_URL=http://backend:8200
+```
 Used by Vite to communicate with the backend API (internal Docker network).
 
 
 
 Backend (backend/.env)
+```bash
+
 PORT=8200
 NODE_ENV=development
 FRONTEND_URL=http://localhost:3010
-
+```
 
 ## 🧑‍💻 Developer Guide
 1. Local Development (without Docker)
 
 Run backend:
+```bash
 cd backend
 npm install
 npm start
-
+```
 
 
 Run frontend:
+```bash
+
 cd frontend
 npm install
 npm run dev
-
-
+```
 
 Visit:
 
@@ -91,9 +97,9 @@ Backend → http://localhost:4210
 3. Code Formatting & Linting
 
 To keep the code clean:
+```bash
 npm run lint
-
-
+```
 4. Folder Naming Rules
 
 Keep React components under frontend/src/components/.
