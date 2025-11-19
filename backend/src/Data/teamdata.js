@@ -3,11 +3,11 @@
 const teamMembers = [
   {
     id: 1,
-    name: "Rana Ahmed",
+    name: "Rana ",
     position: "Backend Devloper",
     image: "",
     bio: "",
-    skills: ["HTML", "CSS", "JavaScript", "React"],
+    skills: [""],
     social: {
       twitter: "",
       linkedin: "",
