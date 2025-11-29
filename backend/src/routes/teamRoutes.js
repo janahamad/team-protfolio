@@ -1,9 +1,10 @@
-const express = require('express');
-const { teamMembers, projects } = require('../Data/teamdata');
+// routes/teamRoutes.js
+import express from 'express';
 
+import { teamMembers, projects } from '../Data/teamdata.js'
 const router = express.Router();
 
-// get all the team memeber
+// 1. Get all team members
 router.get('/members', (req, res) => {
   res.json({
     success: true,
@@ -12,7 +13,7 @@ router.get('/members', (req, res) => {
   });
 });
 
-// get the mermber by the id 
+// 2. Get member by ID
 router.get('/members/:id', (req, res) => {
   const memberId = parseInt(req.params.id);
   const member = teamMembers.find(m => m.id === memberId);
@@ -20,7 +21,7 @@ router.get('/members/:id', (req, res) => {
   if (!member) {
     return res.status(404).json({
       success: false,
-      message: 'Memeber Not Found'
+      message: 'Member Not Found'
     });
   }
   
@@ -30,13 +31,13 @@ router.get('/members/:id', (req, res) => {
   });
 });
 
-// get all the projects
+// 3. Get all projects (populated with team details)
 router.get('/projects', (req, res) => {
   const projectsWithMembers = projects.map(project => ({
     ...project,
     team: project.team.map(memberId => 
       teamMembers.find(m => m.id === memberId)
-    )
+    ).filter(Boolean) // يزيل أي قيم فارغة في حال لم يوجد العضو
   }));
   
   res.json({
@@ -46,20 +47,20 @@ router.get('/projects', (req, res) => {
   });
 });
 
-// search in the team memeber
+// 4. Search functionality
 router.get('/search', (req, res) => {
   const { name, skill } = req.query;
   let results = teamMembers;
   
   if (name) {
     results = results.filter(member => 
-      member.name.includes(name)
+      member.name.toLowerCase().includes(name.toLowerCase())
     );
   }
   
   if (skill) {
     results = results.filter(member => 
-      member.skills.includes(skill)
+      member.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
     );
   }
   
@@ -70,4 +71,4 @@ router.get('/search', (req, res) => {
   });
 });
 
-module.exports = router;
+export default router;
