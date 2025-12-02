@@ -1,5 +1,6 @@
 
 import express from "express";
+import logger from "./middleware/logger.js";
 import cors from "cors";
 import dotenv from "dotenv";
 import teamRoutes from "./routes/teamRoutes.js";
@@ -19,6 +20,7 @@ app.use(cors({
   origin: process.env.FRONTEND_URL || "*"
 }));
 app.use(express.json());
+app.use(logger);
 
 // ********* SWAGGER CONFIGURATION *********
 const swaggerOptions = {
