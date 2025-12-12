@@ -1,8 +1,7 @@
-// routes/teamRoutes.js (الكود المصحح لتنسيق Swagger)
 import express from 'express';
-
 import { teamMembers, projects } from '../Data/teamdata.js'
 const router = express.Router();
+
 /**
  * @swagger
  * tags:
@@ -35,6 +34,7 @@ const router = express.Router();
  * description: قائمة المهارات
  * example: ["React", "CSS"]
  */
+
 /**
  * @swagger
  * /members:
@@ -68,6 +68,7 @@ router.get('/members', (req, res) => {
     data: teamMembers
   });
 });
+
 /**
  * @swagger
  * /members/{id}:
@@ -91,6 +92,7 @@ router.get('/members', (req, res) => {
  * properties:
  * success:
  * type: boolean
+ * example: true
  * data:
  * $ref: '#/components/schemas/Member'
  * 404:
@@ -100,14 +102,14 @@ router.get('/members', (req, res) => {
 router.get('/members/:id', (req, res) => {
   const memberId = parseInt(req.params.id);
   const member = teamMembers.find(m => m.id === memberId);
-    
+
   if (!member) {
     return res.status(404).json({
       success: false,
       message: 'Member Not Found'
     });
   }
-    
+
   res.json({
     success: true,
     data: member
@@ -130,6 +132,7 @@ router.get('/members/:id', (req, res) => {
  * properties:
  * success:
  * type: boolean
+ * example: true
  * count:
  * type: integer
  * data:
@@ -137,10 +140,16 @@ router.get('/members/:id', (req, res) => {
  * items:
  * type: object
  * properties:
- * id: { type: integer }
- * title: { type: string }
- * description: { type: string }
- * technologies: { type: array, items: { type: string } }
+ * id:
+ * type: integer
+ * title:
+ * type: string
+ * description:
+ * type: string
+ * technologies:
+ * type: array
+ * items:
+ * type: string
  * team:
  * type: array
  * description: قائمة تفاصيل أعضاء الفريق العاملين على المشروع
@@ -151,11 +160,11 @@ router.get('/members/:id', (req, res) => {
 router.get('/projects', (req, res) => {
   const projectsWithMembers = projects.map(project => ({
     ...project,
-    team: project.team.map(memberId => 
+    team: project.team.map(memberId =>
       teamMembers.find(m => m.id === memberId)
     ).filter(Boolean)
   }));
-    
+
   res.json({
     success: true,
     count: projects.length,
@@ -192,6 +201,7 @@ router.get('/projects', (req, res) => {
  * properties:
  * success:
  * type: boolean
+ * example: true
  * count:
  * type: integer
  * data:
@@ -203,19 +213,19 @@ router.get('/projects', (req, res) => {
 router.get('/search', (req, res) => {
   const { name, skill } = req.query;
   let results = teamMembers;
-    
+
   if (name) {
-    results = results.filter(member => 
+    results = results.filter(member =>
       member.name.toLowerCase().includes(name.toLowerCase())
     );
   }
-    
+
   if (skill) {
-    results = results.filter(member => 
+    results = results.filter(member =>
       member.skills.some(s => s.toLowerCase().includes(skill.toLowerCase()))
     );
   }
-    
+
   res.json({
     success: true,
     count: results.length,
