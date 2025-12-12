@@ -1,14 +1,42 @@
-
+// routes/teamRoutes.js (الكود المصحح لتنسيق Swagger)
 import express from 'express';
 
 import { teamMembers, projects } from '../Data/teamdata.js'
 const router = express.Router();
-
 /**
  * @swagger
  * tags:
- * name: Members
+ * - name: Members
  * description: عمليات إدارة أعضاء الفريق
+ * - name: Projects
+ * description: عمليات إدارة المشاريع
+ *
+ * components:
+ * schemas:
+ * Member:
+ * type: object
+ * properties:
+ * id:
+ * type: integer
+ * description: معرف العضو الفريد
+ * example: 1
+ * name:
+ * type: string
+ * description: اسم العضو
+ * example: "Jana"
+ * position:
+ * type: string
+ * description: مسمى العضو الوظيفي
+ * example: "Frontend Developer"
+ * skills:
+ * type: array
+ * items:
+ * type: string
+ * description: قائمة المهارات
+ * example: ["React", "CSS"]
+ */
+/**
+ * @swagger
  * /members:
  * get:
  * summary: جلب قائمة بجميع أعضاء الفريق
@@ -23,17 +51,14 @@ const router = express.Router();
  * properties:
  * success:
  * type: boolean
+ * example: true
  * count:
  * type: integer
+ * example: 4
  * data:
  * type: array
  * items:
- * type: object
- * properties:
- * id: { type: integer, example: 1 }
- * name: { type: string, example: "Rana" }
- * position: { type: string, example: "Backend Developer" }
- * skills: { type: array, items: { type: string }, example: ["Node.js", "Express"] }
+ * $ref: '#/components/schemas/Member'
  */
 // 1. Get all team members
 router.get('/members', (req, res) => {
@@ -43,7 +68,6 @@ router.get('/members', (req, res) => {
     data: teamMembers
   });
 });
-
 /**
  * @swagger
  * /members/{id}:
@@ -92,9 +116,6 @@ router.get('/members/:id', (req, res) => {
 
 /**
  * @swagger
- * tags:
- * name: Projects
- * description: عمليات إدارة المشاريع
  * /projects:
  * get:
  * summary: جلب قائمة بجميع المشاريع مع تفاصيل الأعضاء
@@ -202,32 +223,4 @@ router.get('/search', (req, res) => {
   });
 });
 
-/**
- * @swagger
- * components:
- * schemas:
- * Member:
- * type: object
- * properties:
- * id:
- * type: integer
- * description: معرف العضو الفريد
- * example: 1
- * name:
- * type: string
- * description: اسم العضو
- * example: "Jana"
- * position:
- * type: string
- * description: مسمى العضو الوظيفي
- * example: "Frontend Developer"
- * bio:
- * type: string
- * skills:
- * type: array
- * items:
- * type: string
- * description: قائمة المهارات
- * example: ["React", "CSS"]
- */
 export default router;

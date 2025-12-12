@@ -1,4 +1,3 @@
-
 import express from "express";
 import logger from "./middleware/logger.js";
 import cors from "cors";
@@ -37,8 +36,7 @@ const swaggerOptions = {
       },
     ],
   },
-  // تحديد المسار الذي سيبحث فيه عن تعليقات JSDoc
-  apis: ["./routes/*.js"], // سيجد ملف teamRoutes.js
+  apis: ["./src/routes/*.js"],
 };
 
 const swaggerSpec = swaggerJsdoc(swaggerOptions);
