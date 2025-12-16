@@ -2,40 +2,43 @@ import { useEffect, useState } from "react";
 import { getMembers } from "../api/teamApi";
 import MemberCard from "../components/MemberCard";
 
-export default function Home() {
+const Home = () => {
   const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getMembers().then(setMembers);
+    const fetchMembers = async () => {
+      try {
+        const res = await getMembers();
+        setMembers(res?.data?.data || []); // ✅ FIX IS HERE
+      } catch (err) {
+        console.error("Failed to load members:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMembers();
   }, []);
 
-  return (
-    <div style={styles.container}>
-      <header style={styles.header}>
-        <h1>Building Ideas. Growing Together.</h1>
-        <p>Great teams don’t happen by chance — they’re built.</p>
-      </header>
+  if (loading) {
+    return <p style={{ textAlign: "center" }}>Loading...</p>;
+  }
 
-      <div style={styles.grid}>
+  return (
+    <div className="container">
+      <h1 className="title">Meet the Team</h1>
+      <p className="subtitle">
+        A passionate team building modern, scalable solutions.
+      </p>
+
+      <div className="grid">
         {members.map(member => (
           <MemberCard key={member.id} member={member} />
         ))}
       </div>
     </div>
   );
-}
-
-const styles = {
-  container: {
-    padding: "40px"
-  },
-  header: {
-    marginBottom: "40px",
-    color: "var(--primary)"
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
-    gap: "20px"
-  }
 };
+
+export default Home;

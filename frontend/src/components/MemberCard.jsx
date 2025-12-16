@@ -1,23 +1,38 @@
 import { Link } from "react-router-dom";
+import { avatarMap } from "../assets/avatars/index.js";
 
-export default function MemberCard({ member }) {
+const MemberCard = ({ member }) => {
+  const avatar =
+    member?.name && avatarMap[member.name.toLowerCase()]
+      ? avatarMap[member.name.toLowerCase()]
+      : null;
+
   return (
-    <Link to={`/member/${member.id}`}>
-      <div style={styles.card}>
+    <Link to={`/member/${member.id}`} style={{ textDecoration: "none" }}>
+      <div className="member-card">
+        <div className="avatar">
+          {avatar ? (
+            <img src={avatar} alt={member.name} />
+          ) : (
+            <span>{member.name.charAt(0)}</span>
+          )}
+        </div>
+
         <h3>{member.name}</h3>
-        <p>{member.position}</p>
+        <p className="role">{member.position}</p>
+
+        <div className="skills">
+          {member.skills?.slice(0, 3).map((skill, i) => (
+            <span key={i} className="skill-badge">
+              {skill}
+            </span>
+          ))}
+        </div>
+
+        <span className="cta">View Profile →</span>
       </div>
     </Link>
   );
-}
-
-const styles = {
-  card: {
-    backgroundColor: "var(--secondary)",
-    color: "#fff",
-    padding: "24px",
-    borderRadius: "12px",
-    transition: "0.3s",
-    cursor: "pointer"
-  }
 };
+
+export default MemberCard;

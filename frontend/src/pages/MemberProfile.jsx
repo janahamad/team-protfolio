@@ -1,45 +1,78 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMemberById, getProjects } from "../api/teamApi";
+import { avatarMap } from "../assets/avatars";
 
 export default function MemberProfile() {
   const { id } = useParams();
+
   const [member, setMember] = useState(null);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    getMemberById(id).then(setMember);
+    // ✅ SAME AS ORIGINAL (but async-safe)
+    getMemberById(id).then(memberData => {
+      setMember(memberData);
+    });
 
     getProjects().then(allProjects => {
-      const solo = allProjects.filter(
-        p => p.team.length === 1 && p.team[0].id === Number(id)
+      const memberProjects = allProjects.filter(project =>
+        project.team?.some(m => m.id === Number(id))
       );
-      setProjects(solo);
+      setProjects(memberProjects);
     });
   }, [id]);
 
-  if (!member) return <p style={{ padding: "40px" }}>Loading...</p>;
+  if (!member) {
+    return <p style={{ padding: "40px" }}>Loading...</p>;
+  }
+
+  const avatar = avatarMap[member.name?.toLowerCase()] || null;
 
   return (
-    <div style={{ padding: "40px" }}>
-      <h1 style={{ color: "var(--primary)" }}>{member.name}</h1>
-      <h3>{member.position}</h3>
-      <p>{member.bio}</p>
+    <div className="member-profile">
+      <Link to="/" className="back-link">← Back to Team</Link>
 
-      <h4>Skills</h4>
-      <ul>
-        {member.skills.map(skill => (
-          <li key={skill}>{skill}</li>
-        ))}
-      </ul>
+      <div className="profile-header">
+        <div className="avatar large">
+          {avatar ? (
+            <img src={avatar} alt={member.name} />
+          ) : (
+            <span>{member.name.charAt(0)}</span>
+          )}
+        </div>
 
-      <h4>Solo Projects</h4>
-      {projects.length === 0 && <p>No solo projects yet.</p>}
-      <ul>
-        {projects.map(project => (
-          <li key={project.id}>{project.title}</li>
-        ))}
-      </ul>
+        <h1>{member.name}</h1>
+        <h3>{member.position}</h3>
+        <p>{member.bio}</p>
+      </div>
+
+      <section className="section">
+        <h2>Skills</h2>
+        <div className="skills">
+          {member.skills.map(skill => (
+            <span key={skill} className="skill-badge">
+              {skill}
+            </span>
+          ))}
+        </div>
+      </section>
+
+      <section className="section">
+        <h2>Projects</h2>
+        {projects.length === 0 ? (
+          <p>No projects yet.</p>
+        ) : (
+          <div className="projects">
+            {projects.map(project => (
+              <div key={project.id} className="project-card">
+                <h4>{project.title}</h4>
+                <p>{project.description}</p>
+              </div>
+            ))}
+          </div>
+        )}
+      </section>
     </div>
   );
 }
