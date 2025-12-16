@@ -1,0 +1,18 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: team-backend
+    ports:
+      - "4210:8200"    # hostPort:containerPort
+    restart: always
+
+  frontend:
+    build: ./frontend
+    container_name: team-frontend
+    ports:
+      - "3010:80"      # hostPort:containerPort
+    depends_on:
+      - backend
+    restart: always

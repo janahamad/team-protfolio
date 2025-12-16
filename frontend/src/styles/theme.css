@@ -1,0 +1,23 @@
+:root {
+  --primary: #3C467B;
+  --secondary: #50589C;
+  --accent: #636CCB;
+  --highlight: #6E8CFB;
+  --bg: #f5f6fa;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: #222;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -1,23 +1,20 @@
-# Ignore Docker configuration files
-Dockerfile
-docker-compose.yml
+# Environment variables
+*.env
 
-# Ignore build artifacts or temporary files (optional but recommended)
+# Dependencies
+node_modules/
+vendor/
+
+# Logs & temp files
 *.log
 *.tmp
 *.bak
 
-# Ignore OS/system files
+# OS files
 .DS_Store
 Thumbs.db
 
-# Ignore IDE/project settings
+# IDE settings
 .vscode/
 .idea/
 *.swp
-
-# Ignore dependency or package directories (if any in the future)
-node_modules/
-vendor/
-
-backend/.env
