@@ -1,5 +1,7 @@
+// routes/teamRoutes.js
 import express from 'express';
-import { teamMembers, projects } from '../Data/teamdata.js'
+import { teamMembers, projects } from '../Data/teamdata.js';
+
 const router = express.Router();
 
 /**
@@ -160,9 +162,9 @@ router.get('/members/:id', (req, res) => {
 router.get('/projects', (req, res) => {
   const projectsWithMembers = projects.map(project => ({
     ...project,
-    team: project.team.map(memberId =>
-      teamMembers.find(m => m.id === memberId)
-    ).filter(Boolean)
+    team: project.team
+      .map(memberId => teamMembers.find(m => m.id === memberId))
+      .filter(Boolean)
   }));
 
   res.json({
