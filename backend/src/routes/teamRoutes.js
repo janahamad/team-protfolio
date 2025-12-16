@@ -6,61 +6,57 @@ const router = express.Router();
 
 /**
  * @swagger
- * tags:
- * - name: Members
- * description: عمليات إدارة أعضاء الفريق
- * - name: Projects
- * description: عمليات إدارة المشاريع
- *
  * components:
- * schemas:
- * Member:
- * type: object
- * properties:
- * id:
- * type: integer
- * description: معرف العضو الفريد
- * example: 1
- * name:
- * type: string
- * description: اسم العضو
- * example: "Jana"
- * position:
- * type: string
- * description: مسمى العضو الوظيفي
- * example: "Frontend Developer"
- * skills:
- * type: array
- * items:
- * type: string
- * description: قائمة المهارات
- * example: ["React", "CSS"]
+ *   schemas:
+ *     Member:
+ *       type: object
+ *       properties:
+ *         id:
+ *           type: integer
+ *           example: 1
+ *         name:
+ *           type: string
+ *           example: Jana
+ *         position:
+ *           type: string
+ *           example: Frontend Developer
+ *         bio:
+ *           type: string
+ *           example: Creating interactive user experiences.
+ *         skills:
+ *           type: array
+ *           items:
+ *             type: string
+ *           example:
+ *             - React
+ *             - CSS
  */
 
 /**
  * @swagger
  * /members:
- * get:
- * summary: جلب قائمة بجميع أعضاء الفريق
- * tags: [Members]
- * responses:
- * 200:
- * description: قائمة ناجحة بأعضاء الفريق
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * success:
- * type: boolean
- * example: true
- * count:
- * type: integer
- * example: 4
- * data:
- * type: array
- * items:
- * $ref: '#/components/schemas/Member'
+ *   get:
+ *     tags:
+ *       - Members
+ *     summary: Get all team members
+ *     responses:
+ *       200:
+ *         description: List of team members
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                   example: 4
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Member'
  */
 // 1. Get all team members
 router.get('/members', (req, res) => {
@@ -74,31 +70,31 @@ router.get('/members', (req, res) => {
 /**
  * @swagger
  * /members/{id}:
- * get:
- * summary: جلب معلومات عضو محدد بواسطة ID
- * tags: [Members]
- * parameters:
- * - in: path
- * name: id
- * schema:
- * type: integer
- * required: true
- * description: معرف العضو (ID)
- * responses:
- * 200:
- * description: معلومات العضو المطلوبة
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * success:
- * type: boolean
- * example: true
- * data:
- * $ref: '#/components/schemas/Member'
- * 404:
- * description: العضو غير موجود
+ *   get:
+ *     tags:
+ *       - Members
+ *     summary: Get member by ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Member found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   $ref: '#/components/schemas/Member'
+ *       404:
+ *         description: Member not found
  */
 // 2. Get member by ID
 router.get('/members/:id', (req, res) => {
@@ -121,42 +117,43 @@ router.get('/members/:id', (req, res) => {
 /**
  * @swagger
  * /projects:
- * get:
- * summary: جلب قائمة بجميع المشاريع مع تفاصيل الأعضاء
- * tags: [Projects]
- * responses:
- * 200:
- * description: قائمة ناجحة بالمشاريع.
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * success:
- * type: boolean
- * example: true
- * count:
- * type: integer
- * data:
- * type: array
- * items:
- * type: object
- * properties:
- * id:
- * type: integer
- * title:
- * type: string
- * description:
- * type: string
- * technologies:
- * type: array
- * items:
- * type: string
- * team:
- * type: array
- * description: قائمة تفاصيل أعضاء الفريق العاملين على المشروع
- * items:
- * $ref: '#/components/schemas/Member'
+ *   get:
+ *     tags:
+ *       - Projects
+ *     summary: Get all projects with team members
+ *     responses:
+ *       200:
+ *         description: List of projects
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                   example: 2
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       id:
+ *                         type: integer
+ *                       title:
+ *                         type: string
+ *                       description:
+ *                         type: string
+ *                       technologies:
+ *                         type: array
+ *                         items:
+ *                           type: string
+ *                       team:
+ *                         type: array
+ *                         items:
+ *                           $ref: '#/components/schemas/Member'
  */
 // 3. Get all projects (populated with team details)
 router.get('/projects', (req, res) => {
@@ -177,39 +174,38 @@ router.get('/projects', (req, res) => {
 /**
  * @swagger
  * /search:
- * get:
- * summary: البحث عن أعضاء الفريق بالاسم أو المهارة
- * tags: [Members]
- * parameters:
- * - in: query
- * name: name
- * schema:
- * type: string
- * required: false
- * description: البحث عن عضو بالاسم (جزئي)
- * - in: query
- * name: skill
- * schema:
- * type: string
- * required: false
- * description: البحث عن عضو بمهارة معينة (جزئية)
- * responses:
- * 200:
- * description: قائمة نتائج البحث
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * success:
- * type: boolean
- * example: true
- * count:
- * type: integer
- * data:
- * type: array
- * items:
- * $ref: '#/components/schemas/Member'
+ *   get:
+ *     tags:
+ *       - Members
+ *     summary: Search team members by name or skill
+ *     parameters:
+ *       - in: query
+ *         name: name
+ *         schema:
+ *           type: string
+ *         description: Search by member name
+ *       - in: query
+ *         name: skill
+ *         schema:
+ *           type: string
+ *         description: Search by skill
+ *     responses:
+ *       200:
+ *         description: Search results
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 count:
+ *                   type: integer
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     $ref: '#/components/schemas/Member'
  */
 // 4. Search functionality
 router.get('/search', (req, res) => {

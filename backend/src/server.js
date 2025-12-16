@@ -9,8 +9,6 @@ import teamRoutes from "./routes/teamRoutes.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 // ********* END SWAGGER IMPORTS *********
-=======
-import teamRoutes from "./routes/teamRoutes.js"; // استدعاء ملف الراوتر
 
 dotenv.config();
 
@@ -53,9 +51,7 @@ app.get("/", (req, res) => {
   res.json({ message: "Backend is running successfully!" });
 });
 
-<<<<<<< HEAD
 app.use("/api", teamRoutes);
-=======
 // تفعيل روابط الفريق والمشاريع
 // جميع الروابط ستبدأ بـ /api
 // مثال: http://localhost:8200/api/members
