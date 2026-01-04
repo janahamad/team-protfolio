@@ -22,3 +22,33 @@ body {
   background-color: var(--bg);
   color: var(--text-main);
 }
+/* ===== Landing Hero ===== */
+.hero {
+  text-align: center;
+  padding: 4.5rem 1.5rem 3.5rem;
+}
+
+.hero-title {
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 640px;
+  margin: 0 auto 0.75rem;
+  line-height: 1.6;
+}
+
+.hero-roles {
+  font-size: 0.95rem;
+  color: var(--primary);
+}
+
+/* ===== Team Section ===== */
+.team-section {
+  margin-top: 3.5rem;
+}
