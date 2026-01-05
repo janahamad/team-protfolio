@@ -9,12 +9,21 @@ const members = [
 
 export default function Navbar() {
   return (
-    <nav style={styles.nav}>
-      <Link to="/" style={styles.logo}>Our Team</Link>
+    <nav className="bg-[#3C467B] text-white px-8 py-4 flex items-center justify-between">
+      <Link
+        to="/"
+        className="text-xl font-bold tracking-wide hover:text-[#6E8CFB] transition"
+      >
+        Our Team
+      </Link>
 
-      <div style={styles.links}>
-        {members.map(m => (
-          <Link key={m.id} to={`/member/${m.id}`} style={styles.link}>
+      <div className="flex gap-6">
+        {members.map((m) => (
+          <Link
+            key={m.id}
+            to={`/member/${m.id}`}
+            className="font-medium hover:text-[#6E8CFB] transition"
+          >
             {m.name}
           </Link>
         ))}
@@ -22,25 +31,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-const styles = {
-  nav: {
-    backgroundColor: "var(--primary)",
-    color: "#fff",
-    padding: "16px 32px",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center"
-  },
-  logo: {
-    fontSize: "20px",
-    fontWeight: "bold"
-  },
-  links: {
-    display: "flex",
-    gap: "20px"
-  },
-  link: {
-    fontWeight: 500
-  }
-};

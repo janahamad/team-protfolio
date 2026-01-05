@@ -5,69 +5,97 @@ import { avatarMap } from "../assets/avatars";
 
 export default function MemberProfile() {
   const { id } = useParams();
-
   const [member, setMember] = useState(null);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // ✅ SAME AS ORIGINAL (but async-safe)
-    getMemberById(id).then(memberData => {
-      setMember(memberData);
-    });
+    getMemberById(id).then(setMember);
 
-    getProjects().then(allProjects => {
-      const memberProjects = allProjects.filter(project =>
-        project.team?.some(m => m.id === Number(id))
-      );
-      setProjects(memberProjects);
-    });
+    getProjects().then(all =>
+      setProjects(all.filter(p =>
+        p.team?.some(m => m.id === Number(id))
+      ))
+    );
   }, [id]);
 
-  if (!member) {
-    return <p style={{ padding: "40px" }}>Loading...</p>;
-  }
+  if (!member) return <p className="mt-20 text-center">Loading...</p>;
 
-  const avatar = avatarMap[member.name?.toLowerCase()] || null;
+  const avatar = avatarMap[member.name?.toLowerCase()];
 
   return (
-    <div className="member-profile">
-      <Link to="/" className="back-link">← Back to Team</Link>
+    <div className="max-w-5xl mx-auto px-6 py-12">
 
-      <div className="profile-header">
-        <div className="avatar large">
+      <Link to="/" className="text-sm text-[#6E8CFB] hover:underline">
+        ← Back to Team
+      </Link>
+
+      {/* Profile Header */}
+      <div className="text-center mt-10">
+        <div className="w-36 h-36 mx-auto rounded-full bg-[#ECEEFF]
+                        overflow-hidden flex items-center justify-center">
           {avatar ? (
-            <img src={avatar} alt={member.name} />
+            <img src={avatar} alt={member.name}
+                 className="w-full h-full object-cover" />
           ) : (
-            <span>{member.name.charAt(0)}</span>
+            <span className="text-4xl text-[#50589C]">
+              {member.name.charAt(0)}
+            </span>
           )}
         </div>
 
-        <h1>{member.name}</h1>
-        <h3>{member.position}</h3>
-        <p>{member.bio}</p>
+        <h1 className="mt-6 text-3xl font-bold text-[#3C467B]">
+          {member.name}
+        </h1>
+
+        <h3 className="text-[#50589C] mt-1">
+          {member.position}
+        </h3>
+
+        <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          {member.bio}
+        </p>
       </div>
 
-      <section className="section">
-        <h2>Skills</h2>
-        <div className="skills">
+      {/* Skills */}
+      <section className="mt-14">
+        <h2 className="text-xl font-semibold text-[#3C467B] mb-4">
+          Skills
+        </h2>
+
+        <div className="flex flex-wrap gap-3">
           {member.skills.map(skill => (
-            <span key={skill} className="skill-badge">
+            <span
+              key={skill}
+              className="px-4 py-2 rounded-full text-sm
+                         bg-[#ECEEFF] text-[#50589C]"
+            >
               {skill}
             </span>
           ))}
         </div>
       </section>
 
-      <section className="section">
-        <h2>Projects</h2>
+      {/* Projects */}
+      <section className="mt-14">
+        <h2 className="text-xl font-semibold text-[#3C467B] mb-4">
+          Projects
+        </h2>
+
         {projects.length === 0 ? (
-          <p>No projects yet.</p>
+          <p className="text-gray-500">No projects yet.</p>
         ) : (
-          <div className="projects">
+          <div className="grid gap-6 sm:grid-cols-2">
             {projects.map(project => (
-              <div key={project.id} className="project-card">
-                <h4>{project.title}</h4>
-                <p>{project.description}</p>
+              <div
+                key={project.id}
+                className="bg-white rounded-xl shadow p-5"
+              >
+                <h4 className="font-semibold text-[#3C467B]">
+                  {project.title}
+                </h4>
+                <p className="text-sm text-gray-600 mt-2">
+                  {project.description}
+                </p>
               </div>
             ))}
           </div>
