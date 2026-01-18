@@ -28,17 +28,37 @@ export const teamMembers = [
     name: "Jana",
     position: "Infrastructure & DevOps Engineer",
     image: "",
-    bio: "Computer Science graduate with hands-on experience in DevOps, cloud infrastructure, and containerized deployments. Passionate about reliability, automation, and scalable systems.",
+    bio: "Computer Science graduate with extensive experience in high-availability infrastructure, cloud migrations, and DevOps automation. Proven track record in managing VPS environments, containerization, and implementing robust security measures.",
     skills: [
-      "Docker",
-      "Linux",
-      "Nginx",
-      "CI/CD",
-      "MongoDB",
-      "MinIO",
-      "AWS",
-      "GCP",
-      "VPS Administration"
+      "Docker", "Linux & Windows Server", "Nginx", "HAProxy", "CI/CD", 
+      "MongoDB Replicas", "MinIO", "AWS", "GCP", "VPS Administration",
+      "Redis", "RabbitMQ", "Grafana Monitoring", "ELK Stack (Logstash, Kibana)",
+      "Network Security (UFW, Fail2Ban, SSL)", "FastAPI"
+    ],
+    experience: [
+      {
+        role: "Junior Infrastructure Engineer",
+        company: "Nadeer",
+        period: "Jun - Aug 2025",
+        tasks: "Managed Docker containers on VPS, migrated projects from GCP to VPS, and implemented security (UFW, Fail2Ban)."
+      },
+      {
+        role: "IT Operations Trainee",
+        company: "T2",
+        period: "Apr - May 2025",
+        tasks: "Managed HAProxy load balancers, database replication, and monitoring with Grafana."
+      },
+      {
+        role: "DevOps Infrastructure COOP",
+        company: "Manafa Capital",
+        period: "Jul - Aug 2023",
+        tasks: "Handled IT regulatory compliance (SAMA), server upgrades, and ELK stack configuration."
+      }
+    ],
+    certifications: [
+      "AWS Certified Cloud Practitioner (2025)",
+      "Oracle Cloud Infrastructure Certified Foundations Associate (2023)",
+      "Cisco Networking & Cyberhub Academy - CyberOps Associate (2021)"
     ],
     social: {
       linkedin: "https://www.linkedin.com/in/janaalghasham",
@@ -87,7 +107,6 @@ export const teamMembers = [
     }
   }
 ];
-
 export const projects = [
   // --- SOLO PROJECTS ---
   {
@@ -113,11 +132,13 @@ export const projects = [
     team: [1, 2], // Rana + Jana
     technologies: ["React", "Node.js", "Express"]
   },
+
   {
-    id: 4,
-    title: "E-Learning Platform for Learning Difficulties",
-    description: "An accessible e-learning platform designed for users with hearing and reading difficulties.",
-    team: [1, 3], // Rana + Manar
-    technologies: ["React", "ASP.NET Core", "PostgreSQL"]
+    id: 5,
+    title: "SEO Checker Pro",
+    description: "A high-performance web application designed for instant technical SEO audits, providing actionable insights, dynamic scoring, and professional PDF reports.",
+    team: [1, 2], 
+    technologies: ["FastAPI", "React", "Tailwind CSS", "BeautifulSoup4", "ReportLab"],
+    github: "https://github.com/ranaahmd/SEO"
   }
 ];
