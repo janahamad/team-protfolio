@@ -18,9 +18,9 @@ export const teamMembers = [
       "Git"
     ],
     social: {
-      linkedin: "https://www.linkedin.com",
-      github: "https://github.com",
-      twitter: ""
+      linkedin: "https://www.linkedin.com/in/rana-ahmed-864bb41b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
+      github: "https://github.com/ranaahmd",
+    
     }
   },
   {
@@ -42,8 +42,8 @@ export const teamMembers = [
     ],
     social: {
       linkedin: "https://www.linkedin.com/in/janaalghasham",
-      github: "",
-      twitter: ""
+      github: "https://github.com/janahamad",
+      phone: "+966550720727"
     }
   },
   {
