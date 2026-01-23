@@ -8,19 +8,11 @@ export const teamMembers = [
     image: "",
     bio: "Innovative software engineer passionate about building scalable, user-centric applications using modern web technologies and clean architecture principles.",
     skills: [
-      "Python",
-      "JavaScript",
-      "React",
-      "Node.js",
-      "Django",
-      "PostgreSQL",
-      "Docker",
-      "Git"
+      "Python", "JavaScript", "React", "Node.js", "Django", "PostgreSQL", "Docker", "Git"
     ],
     social: {
-      linkedin: "https://www.linkedin.com/in/rana-ahmed-864bb41b7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app",
-      github: "https://github.com/ranaahmd",
-    
+      linkedin: "https://www.linkedin.com/in/rana-ahmed-864bb41b7",
+      github: "https://github.com/ranaahmd"
     }
   },
   {
@@ -30,7 +22,7 @@ export const teamMembers = [
     image: "",
     bio: "Computer Science graduate with extensive experience in high-availability infrastructure, cloud migrations, and DevOps automation. Proven track record in managing VPS environments, containerization, and implementing robust security measures.",
     skills: [
-      "Docker", "Linux & Windows Server", "Nginx", "HAProxy", "CI/CD", 
+      "Docker", "Linux & Windows Server", "Nginx", "HAProxy", "CI/CD",
       "MongoDB Replicas", "MinIO", "AWS", "GCP", "VPS Administration",
       "Redis", "RabbitMQ", "Grafana Monitoring", "ELK Stack (Logstash, Kibana)",
       "Network Security (UFW, Fail2Ban, SSL)", "FastAPI"
@@ -40,19 +32,19 @@ export const teamMembers = [
         role: "Junior Infrastructure Engineer",
         company: "Nadeer",
         period: "Jun - Aug 2025",
-        tasks: "Managed Docker containers on VPS, migrated projects from GCP to VPS, and implemented security (UFW, Fail2Ban)."
+        tasks: "Deployed and containerized full-stack applications; managed Docker containers for staging and production on a VPS. Configured high-availability infrastructure using MongoDB replicas and MinIO buckets. Migrated multiple projects from GCP to VPS, enhancing performance and reducing costs. Set up Site24x7 for server monitoring and implemented VPS security measures (UFW, Fail2Ban, SSL). Assisted developers with deployments, domain configuration, and credential management."
       },
       {
         role: "IT Operations Trainee",
         company: "T2",
         period: "Apr - May 2025",
-        tasks: "Managed HAProxy load balancers, database replication, and monitoring with Grafana."
+        tasks: "Managed Linux and Windows Server environments, including hosting websites, configuring HAProxy load balancers, deploying Docker containers, and publishing via IIS. Implemented database replication and high availability solutions, with hands-on experience in Grafana monitoring, caching (Redis), messaging (RabbitMQ), scripting, and backup automation."
       },
       {
         role: "DevOps Infrastructure COOP",
         company: "Manafa Capital",
         period: "Jul - Aug 2023",
-        tasks: "Handled IT regulatory compliance (SAMA), server upgrades, and ELK stack configuration."
+        tasks: "Gained hands-on experience with IT regulatory compliance and cloud infrastructure management. Tasks included server upgrades, installing and configuring Logstash and Kibana, and developing IT governance and change management policies in line with SAMA requirements."
       }
     ],
     certifications: [
@@ -73,13 +65,7 @@ export const teamMembers = [
     image: "",
     bio: "Full Stack developer focused on building accessible, user-centered interfaces with strong attention to usability, performance, and clean UI design.",
     skills: [
-      "React",
-      "TypeScript",
-      "UI/UX Design",
-      "Tailwind CSS",
-      "REST APIs",
-      "Testing",
-      "Git"
+      "React", "TypeScript", "UI/UX Design", "Tailwind CSS", "REST APIs", "Testing", "Git"
     ],
     social: {
       linkedin: "https://sa.linkedin.com/in/manar-mal-214018327",
@@ -94,11 +80,7 @@ export const teamMembers = [
     image: "",
     bio: "Project manager focused on team coordination, delivery planning, and ensuring projects are delivered efficiently and on time.",
     skills: [
-      "Agile",
-      "Scrum",
-      "Team Management",
-      "Communication",
-      "Planning"
+      "Agile", "Scrum", "Team Management", "Communication", "Planning"
     ],
     social: {
       linkedin: "",
@@ -137,7 +119,7 @@ export const projects = [
     id: 5,
     title: "SEO Checker Pro",
     description: "A high-performance web application designed for instant technical SEO audits, providing actionable insights, dynamic scoring, and professional PDF reports.",
-    team: [1, 2], 
+    team: [1, 2],
     technologies: ["FastAPI", "React", "Tailwind CSS", "BeautifulSoup4", "ReportLab"],
     github: "https://github.com/ranaahmd/SEO"
   }
