@@ -120,8 +120,9 @@ export default function MemberProfile() {
                 <h2 className="text-2xl font-bold text-[#3C467B] mb-8">Professional Journey</h2>
                 <div className="space-y-8 relative before:absolute before:left-[27px] before:top-2 before:bottom-2 before:w-0.5 before:bg-[#ECEEFF]">
                   {member.experience.map((exp, index) => {
-                    const logoKey = exp.company.toLowerCase();
-                    const logo = brandIcons[logoKey];
+                    const companyLower = exp.company.toLowerCase();
+                    const logoKey = Object.keys(brandIcons).find(key => companyLower.includes(key));
+                    const logo = logoKey ? brandIcons[logoKey] : null;
                     return (
                       <div key={index} className="relative pl-16 group">
                         <div className="absolute left-0 top-0 w-14 h-14 rounded-2xl bg-white border border-[#ECEEFF] shadow-sm flex items-center justify-center z-10 group-hover:border-[#6E8CFB] transition-colors overflow-hidden">

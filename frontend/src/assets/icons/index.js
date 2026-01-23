@@ -2,8 +2,8 @@ import T2_logo from "../T2_logo.jpg";
 import Manafa_logo from "../Manafa_logo.jpg";
 import Nadeer_logo from "../Nadeer_logo.jpg";
 import GitHub_icon from "../GitHub_logo.png";
-import LinkedIn_icon from "../LinkedIn_logo.jpg";
-import Phone_icon from "../Phone_logo.jpg";
+import LinkedIn_icon from "../LinkedIn_logo.png";
+import Phone_icon from "../Phone_logo.png";
 
 export const brandIcons = {
   t2: T2_logo,
