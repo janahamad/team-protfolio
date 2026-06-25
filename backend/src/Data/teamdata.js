@@ -29,6 +29,12 @@ export const teamMembers = [
     ],
     experience: [
       {
+        role: "System & Infrastructure Engineer",
+        company: "Aljawad Premium",
+        period: "Dec 2025 - Jun 2026",
+        tasks: "Deployed and managed containerized applications using Docker across development and production environments; supported Kubernetes (k3s) workloads and end-to-end infrastructure operations including servers, VPS hosting, backups, and monitoring. Managed technical projects and implemented ERPNext integrations with Power BI, n8n workflows, and AI-based automation solutions to streamline reporting, automate business processes, and support operational decision-making. Administered ERPNext, including user management, system configuration, monitoring, troubleshooting, permissions, and process support for internal teams. Designed and implemented ERPNext client scripts, server scripts, custom reports, and automation workflows to improve data accuracy, optimize business processes, and enhance system performance."
+      },
+      {
         role: "Junior Infrastructure Engineer",
         company: "Nadeer",
         period: "Jun - Aug 2025",
