@@ -52,10 +52,6 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api", teamRoutes);
-// تفعيل روابط الفريق والمشاريع
-// جميع الروابط ستبدأ بـ /api
-// مثال: http://localhost:8200/api/members
-app.use("/api", teamRoutes);
 
 // تشغيل السيرفر
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

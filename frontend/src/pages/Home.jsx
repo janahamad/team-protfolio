@@ -13,11 +13,14 @@ const gradients = [
 
 const Home = () => {
   const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getMembers().then((res) => {
-      setMembers(res || []);
-    });
+    getMembers()
+      .then((res) => setMembers(res || []))
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, []);
 
   return (
@@ -52,6 +55,12 @@ const Home = () => {
           </p>
 
           {/* ===== Cards ===== */}
+          {loading && (
+            <p className="text-center text-gray-400 py-16">Loading team members...</p>
+          )}
+          {error && (
+            <p className="text-center text-red-400 py-16">Failed to load team: {error}</p>
+          )}
           <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {members.map((member, index) => {
               const avatar =

@@ -8,18 +8,29 @@ export default function MemberProfile() {
   const { id } = useParams();
   const [member, setMember] = useState(null);
   const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    getMemberById(id).then(setMember);
-
-    getProjects().then(all =>
-      setProjects(all.filter(p =>
-        p.team?.some(m => m.id === Number(id))
-      ))
-    );
+    setLoading(true);
+    setError(null);
+    Promise.all([
+      getMemberById(id),
+      getProjects(),
+    ])
+      .then(([memberData, allProjects]) => {
+        setMember(memberData);
+        setProjects(
+          allProjects.filter(p => p.team?.some(m => m.id === Number(id)))
+        );
+      })
+      .catch((err) => setError(err.message))
+      .finally(() => setLoading(false));
   }, [id]);
 
-  if (!member) return <p className="mt-20 text-center">Loading...</p>;
+  if (loading) return <p className="mt-20 text-center text-gray-400">Loading profile...</p>;
+  if (error) return <p className="mt-20 text-center text-red-400">Error: {error}</p>;
+  if (!member) return <p className="mt-20 text-center text-gray-400">Member not found.</p>;
 
   const avatar = avatarMap[member.name?.toLowerCase()];
 
