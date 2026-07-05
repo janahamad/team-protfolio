@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 const members = [
   { id: 1, name: "Rana" },
   { id: 2, name: "Jana" },
-  { id: 3, name: "Manar" },
-  { id: 4, name: "Shatha" },
 ];
 
 export default function Navbar() {

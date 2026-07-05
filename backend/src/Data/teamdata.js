@@ -72,36 +72,6 @@ export const teamMembers = [
       phone: "+966550720727"
     }
   },
-  {
-    id: 3,
-    name: "Manar",
-    position: "UI/UX & Frontend Developer",
-    image: "",
-    bio: "Full Stack developer focused on building accessible, user-centered interfaces with strong attention to usability, performance, and clean UI design.",
-    skills: [
-      "React", "TypeScript", "UI/UX Design", "Tailwind CSS", "REST APIs", "Testing", "Git"
-    ],
-    social: {
-      linkedin: "https://sa.linkedin.com/in/manar-mal-214018327",
-      github: "",
-      twitter: ""
-    }
-  },
-  {
-    id: 4,
-    name: "Shatha",
-    position: "Project Manager",
-    image: "",
-    bio: "Project manager focused on team coordination, delivery planning, and ensuring projects are delivered efficiently and on time.",
-    skills: [
-      "Agile", "Scrum", "Team Management", "Communication", "Planning"
-    ],
-    social: {
-      linkedin: "",
-      github: "",
-      twitter: ""
-    }
-  }
 ];
 export const projects = [
   // --- SOLO PROJECTS ---
