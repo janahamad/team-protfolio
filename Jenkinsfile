@@ -13,6 +13,7 @@ pipeline {
           cd /workspace/teamportfolio
           echo "🧹 Cleaning up old containers..."
           docker compose down --remove-orphans || true
+          docker rm -f team-backend team-frontend 2>/dev/null || true
         '''
       }
     }
