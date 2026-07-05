@@ -10,6 +10,14 @@ export const teamMembers = [
     skills: [
       "Python", "JavaScript", "React", "Node.js", "Django", "PostgreSQL", "Docker", "Git"
     ],
+    experience: [
+      {
+        role: "Technical Committee Leader",
+        company: "Newtech",
+        period: "Apr 2026 - Present",
+        tasks: "Led the technical team in designing and developing the Newtech platform from scratch. Coordinated task distribution, managed the development workflow, reviewed technical progress, and ensured effective collaboration to deliver a functional and high-quality software solution."
+      }
+    ],
     social: {
       linkedin: "https://www.linkedin.com/in/rana-ahmed-864bb41b7",
       github: "https://github.com/ranaahmd"
