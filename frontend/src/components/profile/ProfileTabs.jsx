@@ -20,8 +20,8 @@ export default function ProfileTabs({ activeTab, onChange }) {
             onClick={() => onChange(tab.key)}
             className={
               isActive
-                ? "px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-[#6E8CFB] to-[#A094FF] text-white shadow-sm transition-all duration-200"
-                : "px-5 py-2.5 rounded-full text-sm font-semibold bg-white text-[#50589C] border border-[#ECEEFF] hover:border-[#6E8CFB] transition-all duration-200"
+                ? "px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-accent-start to-accent-end text-white shadow-sm transition-all duration-200"
+                : "px-5 py-2.5 rounded-full text-sm font-semibold bg-surface text-secondary border border-subtle hover:border-accent-start transition-all duration-200"
             }
           >
             {tab.label}
