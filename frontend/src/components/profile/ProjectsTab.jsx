@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 export default function ProjectsTab({ projects }) {
   if (projects.length === 0) {
     return (
-      <div className="bg-white p-10 rounded-2xl border border-dashed border-[#ECEEFF] text-center">
-        <p className="text-gray-300 text-sm">Collaborative works coming soon...</p>
+      <div className="bg-surface p-10 rounded-2xl border border-dashed border-subtle text-center">
+        <p className="text-faint text-sm">Collaborative works coming soon...</p>
       </div>
     );
   }
@@ -15,7 +15,7 @@ export default function ProjectsTab({ projects }) {
         <Link
           key={project.id}
           to={`/project/${project.id}`}
-          className="group bg-white rounded-2xl border border-[#ECEEFF] overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#6E8CFB]/20 transition-all duration-200"
+          className="group bg-surface rounded-2xl border border-subtle overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-accent-start/20 transition-all duration-200"
         >
           <div className="relative h-40 overflow-hidden">
             {project.image ? (
@@ -25,29 +25,29 @@ export default function ProjectsTab({ projects }) {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
-              <div className="w-full h-full bg-gradient-to-br from-[#6E8CFB] to-[#A094FF] flex items-center justify-center">
+              <div className="w-full h-full bg-gradient-to-br from-accent-start to-accent-end flex items-center justify-center">
                 <span className="text-4xl font-bold text-white">{project.title.charAt(0)}</span>
               </div>
             )}
-            <div className="absolute inset-0 bg-[#3C467B]/0 group-hover:bg-[#3C467B]/40 transition-colors duration-200 flex items-center justify-center">
+            <div className="absolute inset-0 bg-heading/0 group-hover:bg-heading/40 transition-colors duration-200 flex items-center justify-center">
               <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-bold tracking-wide transition-opacity duration-200">
                 View Project →
               </span>
             </div>
           </div>
           <div className="p-5">
-            <h4 className="font-bold text-[#3C467B] mb-2">{project.title}</h4>
+            <h4 className="font-bold text-heading mb-2">{project.title}</h4>
             <div className="flex flex-wrap gap-1 mb-3">
               {project.technologies?.map((tech) => (
                 <span
                   key={tech}
-                  className="text-[10px] px-2 py-0.5 bg-[#F0F2FF] text-[#6E8CFB] rounded-md font-bold uppercase tracking-wide"
+                  className="text-[10px] px-2 py-0.5 bg-accent-soft text-accent-start rounded-md font-bold uppercase tracking-wide"
                 >
                   {tech}
                 </span>
               ))}
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed line-clamp-3">{project.description}</p>
+            <p className="text-sm text-muted leading-relaxed line-clamp-3">{project.description}</p>
           </div>
         </Link>
       ))}

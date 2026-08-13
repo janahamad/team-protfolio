@@ -9,11 +9,11 @@ function DiagramThumbnail({ diagram, onSelect }) {
     <button
       type="button"
       onClick={() => onSelect(diagram)}
-      className="group text-left bg-white rounded-2xl border border-[#ECEEFF] overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#6E8CFB]/20 transition-all duration-200"
+      className="group text-left bg-surface rounded-2xl border border-subtle overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-accent-start/20 transition-all duration-200"
     >
-      <div className="relative h-40 overflow-hidden bg-[#F0F2FF]">
+      <div className="relative h-40 overflow-hidden bg-accent-soft">
         {showFallback ? (
-          <div className="w-full h-full bg-gradient-to-br from-[#6E8CFB] to-[#A094FF] flex items-center justify-center">
+          <div className="w-full h-full bg-gradient-to-br from-accent-start to-accent-end flex items-center justify-center">
             <span className="text-4xl font-bold text-white">{diagram.title.charAt(0)}</span>
           </div>
         ) : (
@@ -26,7 +26,7 @@ function DiagramThumbnail({ diagram, onSelect }) {
         )}
       </div>
       <div className="p-4">
-        <h4 className="font-bold text-[#3C467B] text-sm">{diagram.title}</h4>
+        <h4 className="font-bold text-heading text-sm">{diagram.title}</h4>
       </div>
     </button>
   );
@@ -37,8 +37,8 @@ export default function DiagramsTab({ diagrams }) {
 
   if (!diagrams || diagrams.length === 0) {
     return (
-      <div className="bg-white p-10 rounded-2xl border border-dashed border-[#ECEEFF] text-center">
-        <p className="text-gray-300 text-sm">Diagrams coming soon...</p>
+      <div className="bg-surface p-10 rounded-2xl border border-dashed border-subtle text-center">
+        <p className="text-faint text-sm">Diagrams coming soon...</p>
       </div>
     );
   }
