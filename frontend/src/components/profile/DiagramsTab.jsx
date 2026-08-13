@@ -1,6 +1,37 @@
 import { useState } from "react";
 import DiagramLightbox from "./DiagramLightbox";
 
+function DiagramThumbnail({ diagram, onSelect }) {
+  const [hasError, setHasError] = useState(false);
+  const showFallback = !diagram.image || hasError;
+
+  return (
+    <button
+      type="button"
+      onClick={() => onSelect(diagram)}
+      className="group text-left bg-white rounded-2xl border border-[#ECEEFF] overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#6E8CFB]/20 transition-all duration-200"
+    >
+      <div className="relative h-40 overflow-hidden bg-[#F0F2FF]">
+        {showFallback ? (
+          <div className="w-full h-full bg-gradient-to-br from-[#6E8CFB] to-[#A094FF] flex items-center justify-center">
+            <span className="text-4xl font-bold text-white">{diagram.title.charAt(0)}</span>
+          </div>
+        ) : (
+          <img
+            src={diagram.image}
+            alt={diagram.title}
+            onError={() => setHasError(true)}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        )}
+      </div>
+      <div className="p-4">
+        <h4 className="font-bold text-[#3C467B] text-sm">{diagram.title}</h4>
+      </div>
+    </button>
+  );
+}
+
 export default function DiagramsTab({ diagrams }) {
   const [selected, setSelected] = useState(null);
 
@@ -16,23 +47,7 @@ export default function DiagramsTab({ diagrams }) {
     <>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {diagrams.map((diagram) => (
-          <button
-            key={diagram.id}
-            type="button"
-            onClick={() => setSelected(diagram)}
-            className="group text-left bg-white rounded-2xl border border-[#ECEEFF] overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#6E8CFB]/20 transition-all duration-200"
-          >
-            <div className="relative h-40 overflow-hidden bg-[#F0F2FF]">
-              <img
-                src={diagram.image}
-                alt={diagram.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-            </div>
-            <div className="p-4">
-              <h4 className="font-bold text-[#3C467B] text-sm">{diagram.title}</h4>
-            </div>
-          </button>
+          <DiagramThumbnail key={diagram.id} diagram={diagram} onSelect={setSelected} />
         ))}
       </div>
       <DiagramLightbox diagram={selected} onClose={() => setSelected(null)} />

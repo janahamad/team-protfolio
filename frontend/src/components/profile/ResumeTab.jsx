@@ -24,7 +24,7 @@ export default function ResumeTab({ member }) {
         </div>
 
         {/* Certifications */}
-        {member.certifications && (
+        {member.certifications && member.certifications.length > 0 && (
           <div className="bg-white rounded-2xl border border-[#ECEEFF] p-6 shadow-sm">
             <h2 className="text-lg font-bold text-[#3C467B] mb-5 flex items-center gap-2">
               <span className="w-1.5 h-5 bg-gradient-to-b from-[#A094FF] to-[#6E8CFB] rounded-full" />

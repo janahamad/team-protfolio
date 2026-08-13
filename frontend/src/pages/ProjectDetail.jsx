@@ -1,9 +1,12 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getProjects } from "../api/teamApi";
+import { avatarMap } from "../assets/avatars";
 
 export default function ProjectDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -39,13 +42,14 @@ export default function ProjectDetail() {
   return (
     <div className="min-h-screen bg-[#F8F9FE]">
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <Link
-          to={`/member/${project.team?.[0]?.id ?? ""}`}
+        <button
+          type="button"
+          onClick={() => (location.key === "default" ? navigate("/") : navigate(-1))}
           className="inline-flex items-center gap-2 text-sm text-[#6E8CFB] hover:text-[#50589C] transition-colors mb-8 group"
         >
           <span className="transform group-hover:-translate-x-1 transition-transform duration-200">←</span>
           Back
-        </Link>
+        </button>
 
         <div className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#ECEEFF]">
           <div className="h-56 sm:h-72 w-full overflow-hidden">
@@ -78,18 +82,25 @@ export default function ProjectDetail() {
               <div className="mb-8">
                 <h2 className="text-sm font-bold text-[#3C467B] uppercase tracking-wider mb-3">Team</h2>
                 <div className="flex flex-wrap gap-3">
-                  {project.team.map((member) => (
-                    <Link
-                      key={member.id}
-                      to={`/member/${member.id}?tab=projects`}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#ECEEFF] bg-[#F8F9FE] hover:border-[#6E8CFB] transition-colors duration-150"
-                    >
-                      <span className="w-6 h-6 rounded-full bg-gradient-to-br from-[#6E8CFB] to-[#A094FF] flex items-center justify-center text-[10px] font-bold text-white">
-                        {member.name.charAt(0)}
-                      </span>
-                      <span className="text-sm font-medium text-[#50589C]">{member.name}</span>
-                    </Link>
-                  ))}
+                  {project.team.map((member) => {
+                    const avatar = avatarMap[member.name?.toLowerCase()];
+                    return (
+                      <Link
+                        key={member.id}
+                        to={`/member/${member.id}?tab=projects`}
+                        className="flex items-center gap-2 px-3 py-1.5 rounded-xl border border-[#ECEEFF] bg-[#F8F9FE] hover:border-[#6E8CFB] transition-colors duration-150"
+                      >
+                        <span className="w-6 h-6 rounded-full overflow-hidden flex-shrink-0 bg-gradient-to-br from-[#6E8CFB] to-[#A094FF] flex items-center justify-center">
+                          {avatar ? (
+                            <img src={avatar} alt={member.name} className="w-full h-full object-cover" />
+                          ) : (
+                            <span className="text-[10px] font-bold text-white">{member.name.charAt(0)}</span>
+                          )}
+                        </span>
+                        <span className="text-sm font-medium text-[#50589C]">{member.name}</span>
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
             )}
