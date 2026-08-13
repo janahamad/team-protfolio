@@ -1,15 +1,30 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getMemberById, getProjects } from "../api/teamApi";
 import { avatarMap } from "../assets/avatars";
+import ProfileTabs, { PROFILE_TAB_KEYS } from "../components/profile/ProfileTabs";
+import ResumeTab from "../components/profile/ResumeTab";
+import AboutMeTab from "../components/profile/AboutMeTab";
+import ProjectsTab from "../components/profile/ProjectsTab";
+import DiagramsTab from "../components/profile/DiagramsTab";
 import { brandIcons } from "../assets/icons";
+
+const DEFAULT_TAB = "about";
 
 export default function MemberProfile() {
   const { id } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [member, setMember] = useState(null);
   const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const requestedTab = searchParams.get("tab");
+  const activeTab = PROFILE_TAB_KEYS.includes(requestedTab) ? requestedTab : DEFAULT_TAB;
+
+  const handleTabChange = (tab) => {
+    setSearchParams({ tab }, { replace: true });
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -45,8 +60,6 @@ export default function MemberProfile() {
   );
 
   const avatar = avatarMap[member.name?.toLowerCase()];
-  const expCount = member.experience?.length || 0;
-  const skillCount = member.skills?.length || 0;
 
   return (
     <div className="min-h-screen bg-[#F8F9FE]">
@@ -60,12 +73,9 @@ export default function MemberProfile() {
           Back to Team
         </Link>
 
-        {/* ── PROFILE HEADER ── */}
+        {/* ── SLIM PROFILE HEADER ── */}
         <div className="relative bg-white rounded-[2rem] overflow-hidden shadow-sm border border-[#ECEEFF] mb-10">
-          {/* Top gradient bar */}
           <div className="h-1.5 bg-gradient-to-r from-[#6E8CFB] to-[#A094FF]" />
-
-          {/* Background blobs */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#6E8CFB]/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#A094FF]/8 rounded-full blur-2xl pointer-events-none" />
 
@@ -85,28 +95,8 @@ export default function MemberProfile() {
             </div>
 
             <h1 className="text-4xl font-extrabold text-[#3C467B] tracking-tight mb-2">{member.name}</h1>
-            <div className="inline-block px-4 py-1 rounded-full bg-[#F0F2FF] text-[#50589C] text-sm font-medium mb-5">
+            <div className="inline-block px-4 py-1 rounded-full bg-[#F0F2FF] text-[#50589C] text-sm font-medium mb-6">
               {member.position}
-            </div>
-
-            <p className="text-gray-500 max-w-2xl mx-auto leading-relaxed mb-8">{member.bio}</p>
-
-            {/* Stats row */}
-            <div className="flex justify-center gap-8 mb-8">
-              <div className="text-center">
-                <p className="text-2xl font-bold text-[#3C467B]">{skillCount}</p>
-                <p className="text-xs text-gray-400 mt-0.5 uppercase tracking-wider">Skills</p>
-              </div>
-              {expCount > 0 && (
-                <div className="text-center border-l border-r border-[#ECEEFF] px-8">
-                  <p className="text-2xl font-bold text-[#3C467B]">{expCount}</p>
-                  <p className="text-xs text-gray-400 mt-0.5 uppercase tracking-wider">Experiences</p>
-                </div>
-              )}
-              <div className="text-center">
-                <p className="text-2xl font-bold text-[#3C467B]">{projects.length}</p>
-                <p className="text-xs text-gray-400 mt-0.5 uppercase tracking-wider">Projects</p>
-              </div>
             </div>
 
             {/* Social links */}
@@ -146,142 +136,13 @@ export default function MemberProfile() {
           </div>
         </div>
 
-        {/* ── CONTENT GRID ── */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        {/* ── TABS ── */}
+        <ProfileTabs activeTab={activeTab} onChange={handleTabChange} />
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-8">
-
-            {/* Skills */}
-            <div className="bg-white rounded-2xl border border-[#ECEEFF] p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-[#3C467B] mb-5 flex items-center gap-2">
-                <span className="w-1.5 h-5 bg-gradient-to-b from-[#6E8CFB] to-[#A094FF] rounded-full" />
-                Skills
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                {member.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-3 py-1.5 rounded-xl text-xs font-semibold bg-[#F0F2FF] text-[#50589C] border border-[#ECEEFF] hover:border-[#6E8CFB] hover:bg-[#E8EDFF] transition-colors duration-150 cursor-default"
-                  >
-                    {skill}
-                  </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Certifications */}
-            {member.certifications && (
-              <div className="bg-white rounded-2xl border border-[#ECEEFF] p-6 shadow-sm">
-                <h2 className="text-lg font-bold text-[#3C467B] mb-5 flex items-center gap-2">
-                  <span className="w-1.5 h-5 bg-gradient-to-b from-[#A094FF] to-[#6E8CFB] rounded-full" />
-                  Certifications
-                </h2>
-                <ul className="space-y-3">
-                  {member.certifications.map((cert, i) => (
-                    <li key={i} className="flex items-start gap-2.5 text-sm text-gray-600">
-                      <span className="mt-0.5 w-5 h-5 rounded-full bg-[#F0F2FF] text-[#6E8CFB] flex items-center justify-center flex-shrink-0 text-xs font-bold">
-                        {i + 1}
-                      </span>
-                      {cert}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
-
-          {/* Main content */}
-          <div className="lg:col-span-2 space-y-10">
-
-            {/* Experience */}
-            {member.experience && member.experience.length > 0 && (
-              <section>
-                <h2 className="text-xl font-bold text-[#3C467B] mb-6 flex items-center gap-2">
-                  <span className="w-1.5 h-5 bg-gradient-to-b from-[#6E8CFB] to-[#A094FF] rounded-full" />
-                  Professional Journey
-                </h2>
-                <div className="space-y-4 relative before:absolute before:left-7 before:top-3 before:bottom-3 before:w-px before:bg-gradient-to-b before:from-[#6E8CFB]/30 before:to-[#A094FF]/10">
-                  {member.experience.map((exp, index) => {
-                    const companyLower = exp.company.toLowerCase();
-                    const logoKey = Object.keys(brandIcons).find((key) => companyLower.includes(key));
-                    const logo = logoKey ? brandIcons[logoKey] : null;
-                    return (
-                      <div key={index} className="relative pl-16 group">
-                        {/* Company icon */}
-                        <div className="absolute left-0 top-0 w-14 h-14 rounded-2xl bg-white border border-[#ECEEFF] shadow-sm flex items-center justify-center z-10 group-hover:border-[#6E8CFB] group-hover:shadow-md transition-all duration-200 overflow-hidden">
-                          {logo ? (
-                            <img src={logo} alt={exp.company} className="w-9 h-9 object-contain" />
-                          ) : (
-                            <span className="text-lg font-bold text-[#6E8CFB]">{exp.company.charAt(0)}</span>
-                          )}
-                        </div>
-
-                        {/* Card */}
-                        <div className="bg-white p-5 rounded-2xl border border-[#ECEEFF] shadow-sm group-hover:shadow-md group-hover:border-[#6E8CFB]/20 transition-all duration-200">
-                          <div className="flex items-start justify-between flex-wrap gap-2 mb-1">
-                            <h4 className="text-base font-bold text-[#3C467B]">{exp.role}</h4>
-                            <span className="text-xs font-semibold text-[#6E8CFB] bg-[#F0F2FF] px-2.5 py-0.5 rounded-full whitespace-nowrap">
-                              {exp.period}
-                            </span>
-                          </div>
-                          <p className="text-sm text-[#50589C] font-medium mb-3">{exp.company}</p>
-                          <p className="text-sm text-gray-500 leading-relaxed">{exp.tasks}</p>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </section>
-            )}
-
-            {/* Projects */}
-            <section>
-              <h2 className="text-xl font-bold text-[#3C467B] mb-6 flex items-center gap-2">
-                <span className="w-1.5 h-5 bg-gradient-to-b from-[#A094FF] to-[#6E8CFB] rounded-full" />
-                Projects
-              </h2>
-              {projects.length === 0 ? (
-                <div className="bg-white p-10 rounded-2xl border border-dashed border-[#ECEEFF] text-center">
-                  <p className="text-gray-300 text-sm">Collaborative works coming soon...</p>
-                </div>
-              ) : (
-                <div className="grid gap-5 sm:grid-cols-2">
-                  {projects.map((project) => (
-                    <div
-                      key={project.id}
-                      className="bg-white rounded-2xl border border-[#ECEEFF] p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-[#6E8CFB]/20 transition-all duration-200"
-                    >
-                      <h4 className="font-bold text-[#3C467B] mb-2">{project.title}</h4>
-                      <div className="flex flex-wrap gap-1 mb-3">
-                        {project.technologies?.map((tech) => (
-                          <span
-                            key={tech}
-                            className="text-[10px] px-2 py-0.5 bg-[#F0F2FF] text-[#6E8CFB] rounded-md font-bold uppercase tracking-wide"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="text-sm text-gray-500 leading-relaxed line-clamp-3">{project.description}</p>
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="mt-4 inline-flex items-center gap-1 text-xs font-bold text-[#6E8CFB] hover:underline"
-                        >
-                          View Code ↗
-                        </a>
-                      )}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </section>
-
-          </div>
-        </div>
+        {activeTab === "resume" && <ResumeTab member={member} />}
+        {activeTab === "about" && <AboutMeTab member={member} projectsCount={projects.length} />}
+        {activeTab === "projects" && <ProjectsTab projects={projects} />}
+        {activeTab === "diagrams" && <DiagramsTab diagrams={member.diagrams} />}
       </div>
     </div>
   );
