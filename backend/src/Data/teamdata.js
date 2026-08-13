@@ -6,6 +6,8 @@ export const teamMembers = [
     name: "Rana",
     position: "Full Stack Developer",
     image: "",
+    yearsExperience: 1,
+    diagrams: [],
     bio: "Innovative software engineer passionate about building scalable, user-centric applications using modern web technologies and clean architecture principles.",
     skills: [
       "Python", "JavaScript", "React", "Node.js", "Django", "PostgreSQL", "Docker", "Git"
@@ -28,6 +30,8 @@ export const teamMembers = [
     name: "Jana",
     position: "Infrastructure & DevOps Engineer",
     image: "",
+    yearsExperience: 3,
+    diagrams: [],
     bio: "Computer Science graduate with extensive experience in high-availability infrastructure, cloud migrations, and DevOps automation. Proven track record in managing VPS environments, containerization, and implementing robust security measures.",
     skills: [
       "Docker", "Linux & Windows Server", "Nginx", "HAProxy", "CI/CD",
@@ -79,6 +83,7 @@ export const projects = [
     id: 1,
     title: "SmartMargin",
     description: "A responsive web app that helps small business owners calculate profit margins and visualize cost breakdowns in real time.",
+    image: null,
     team: [1], // Rana solo
     technologies: ["React", "Node.js", "PostgreSQL"]
   },
@@ -86,6 +91,7 @@ export const projects = [
     id: 2,
     title: "Banking System",
     description: "A terminal-based banking system built using Python with OOP, file handling, and exception handling.",
+    image: null,
     team: [1], // Rana solo
     technologies: ["Python"]
   },
@@ -95,6 +101,7 @@ export const projects = [
     id: 3,
     title: "Team Portfolio Website",
     description: "A modern team portfolio showcasing members, skills, and projects.",
+    image: null,
     team: [1, 2], // Rana + Jana
     technologies: ["React", "Node.js", "Express"]
   },
@@ -103,6 +110,7 @@ export const projects = [
     id: 5,
     title: "SEO Checker Pro",
     description: "A high-performance web application designed for instant technical SEO audits, providing actionable insights, dynamic scoring, and professional PDF reports.",
+    image: null,
     team: [1, 2],
     technologies: ["FastAPI", "React", "Tailwind CSS", "BeautifulSoup4", "ReportLab"],
     github: "https://github.com/ranaahmd/SEO"
