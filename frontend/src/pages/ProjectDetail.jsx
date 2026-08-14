@@ -76,7 +76,7 @@ export default function ProjectDetail() {
               ))}
             </div>
 
-            <p className="text-muted leading-relaxed mb-8">{project.description}</p>
+            <p className="text-muted leading-relaxed mb-8 whitespace-pre-line">{project.description}</p>
 
             {project.team?.length > 0 && (
               <div className="mb-8">
@@ -105,16 +105,28 @@ export default function ProjectDetail() {
               </div>
             )}
 
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-bold text-accent-start hover:underline"
-              >
-                View Code ↗
-              </a>
-            )}
+            <div className="flex flex-wrap gap-5">
+              {project.liveUrl && (
+                <a
+                  href={project.liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-bold text-accent-start hover:underline"
+                >
+                  Visit Live Site ↗
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1 text-sm font-bold text-accent-start hover:underline"
+                >
+                  View Code ↗
+                </a>
+              )}
+            </div>
           </div>
         </div>
       </div>
