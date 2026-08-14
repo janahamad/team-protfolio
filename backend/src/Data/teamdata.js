@@ -30,9 +30,9 @@ export const teamMembers = [
     name: "Jana",
     position: "Infrastructure & DevOps Engineer",
     image: "",
-    yearsExperience: 3,
+    yearsExperience: 1,
     diagrams: [],
-    bio: "Computer Science graduate with extensive experience in high-availability infrastructure, cloud migrations, and DevOps automation. Proven track record in managing VPS environments, containerization, and implementing robust security measures.",
+    bio: "Infrastructure & DevOps Engineer experienced in cloud infrastructure, ERP administration, system integrations, automation, and data analytics. Skilled in Linux, Docker, Kubernetes, ERP, Power BI, n8n, and API integrations, with a software development background that bridges infrastructure, business systems, and application development.",
     skills: [
       "Docker", "Linux & Windows Server", "Nginx", "HAProxy", "CI/CD",
       "MongoDB Replicas", "MinIO", "AWS", "GCP", "VPS Administration",
@@ -67,8 +67,11 @@ export const teamMembers = [
     ],
     certifications: [
       "AWS Certified Cloud Practitioner (2025)",
-      "Oracle Cloud Infrastructure Certified Foundations Associate (2023)",
-      "Cisco Networking & Cyberhub Academy - CyberOps Associate (2021)"
+      "Oracle Cloud Infrastructure Certified Foundations Associate (2023)"
+    ],
+    certificationBadges: [
+      { title: "AWS Certified Cloud Practitioner", image: "/badges/aws-cloud-practitioner.png" },
+      { title: "Oracle Cloud Infrastructure Foundations Associate", image: "/badges/oracle-oci-foundations.png" }
     ],
     social: {
       linkedin: "https://www.linkedin.com/in/janaalghasham",
