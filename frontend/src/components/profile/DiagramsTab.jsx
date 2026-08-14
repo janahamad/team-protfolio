@@ -1,5 +1,6 @@
 import { useState } from "react";
 import DiagramLightbox from "./DiagramLightbox";
+import InfrastructureMap from "./InfrastructureMap";
 
 function DiagramThumbnail({ diagram, onSelect }) {
   const [hasError, setHasError] = useState(false);
@@ -32,10 +33,12 @@ function DiagramThumbnail({ diagram, onSelect }) {
   );
 }
 
-export default function DiagramsTab({ diagrams }) {
+export default function DiagramsTab({ diagrams, memberName }) {
   const [selected, setSelected] = useState(null);
+  const showInfrastructureMap = memberName?.toLowerCase() === "jana";
+  const hasDiagrams = diagrams && diagrams.length > 0;
 
-  if (!diagrams || diagrams.length === 0) {
+  if (!showInfrastructureMap && !hasDiagrams) {
     return (
       <div className="bg-surface p-10 rounded-2xl border border-dashed border-subtle text-center">
         <p className="text-faint text-sm">Diagrams coming soon...</p>
@@ -45,11 +48,14 @@ export default function DiagramsTab({ diagrams }) {
 
   return (
     <>
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {diagrams.map((diagram) => (
-          <DiagramThumbnail key={diagram.id} diagram={diagram} onSelect={setSelected} />
-        ))}
-      </div>
+      {showInfrastructureMap && <InfrastructureMap />}
+      {hasDiagrams && (
+        <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${showInfrastructureMap ? "mt-8" : ""}`}>
+          {diagrams.map((diagram) => (
+            <DiagramThumbnail key={diagram.id} diagram={diagram} onSelect={setSelected} />
+          ))}
+        </div>
+      )}
       <DiagramLightbox diagram={selected} onClose={() => setSelected(null)} />
     </>
   );

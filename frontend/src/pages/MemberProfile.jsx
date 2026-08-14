@@ -142,7 +142,7 @@ export default function MemberProfile() {
         {activeTab === "resume" && <ResumeTab member={member} />}
         {activeTab === "about" && <AboutMeTab member={member} projectsCount={projects.length} />}
         {activeTab === "projects" && <ProjectsTab projects={projects} />}
-        {activeTab === "diagrams" && <DiagramsTab diagrams={member.diagrams} />}
+        {activeTab === "diagrams" && <DiagramsTab diagrams={member.diagrams} memberName={member.name} />}
       </div>
     </div>
   );
