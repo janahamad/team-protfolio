@@ -29,7 +29,7 @@ export default function ProjectsTab({ projects }) {
                 <span className="text-4xl font-bold text-white">{project.title.charAt(0)}</span>
               </div>
             )}
-            <div className="absolute inset-0 bg-heading/0 group-hover:bg-heading/40 transition-colors duration-200 flex items-center justify-center">
+            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-200 flex items-center justify-center">
               <span className="opacity-0 group-hover:opacity-100 text-white text-sm font-bold tracking-wide transition-opacity duration-200">
                 View Project →
               </span>

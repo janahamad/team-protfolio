@@ -106,7 +106,7 @@ export default function MemberProfile() {
                   href={member.social.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-surface hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-white hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
                   aria-label="LinkedIn"
                 >
                   <img src={brandIcons.linkedin} alt="LinkedIn" className="w-5 h-5 rounded-sm object-contain" />
@@ -117,7 +117,7 @@ export default function MemberProfile() {
                   href={member.social.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-surface hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-white hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
                   aria-label="GitHub"
                 >
                   <img src={brandIcons.github} alt="GitHub" className="w-5 h-5 rounded-full object-contain" />
@@ -126,7 +126,7 @@ export default function MemberProfile() {
               {member.social?.phone && (
                 <a
                   href={`tel:${member.social.phone}`}
-                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-surface hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
+                  className="w-10 h-10 flex items-center justify-center rounded-xl border border-subtle bg-white hover:border-accent-start hover:shadow-sm hover:-translate-y-0.5 transition-all duration-200"
                   aria-label="Phone"
                 >
                   <img src={brandIcons.phone} alt="Phone" className="w-5 h-5 object-contain" />

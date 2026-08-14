@@ -3,8 +3,12 @@ import { createContext, useContext, useEffect, useState } from "react";
 const ThemeContext = createContext(null);
 
 function getInitialTheme() {
-  const stored = localStorage.getItem("theme");
-  return stored === "light" || stored === "dark" ? stored : "dark";
+  try {
+    const stored = localStorage.getItem("theme");
+    return stored === "light" || stored === "dark" ? stored : "dark";
+  } catch {
+    return "dark";
+  }
 }
 
 export function ThemeProvider({ children }) {
@@ -12,7 +16,11 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // localStorage unavailable (e.g. Safari private mode) — theme still applies for this session
+    }
   }, [theme]);
 
   const toggleTheme = () => {
@@ -28,5 +36,9 @@ export function ThemeProvider({ children }) {
 
 // eslint-disable-next-line react-refresh/only-export-components
 export function useTheme() {
-  return useContext(ThemeContext);
+  const context = useContext(ThemeContext);
+  if (!context) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 }

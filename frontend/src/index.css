@@ -8,7 +8,7 @@
   --color-subtle: 236 238 255;
   --color-heading: 60 70 123;
   --color-secondary: 80 88 156;
-  --color-muted: 156 163 175;
+  --color-muted: 107 114 128;
   --color-faint: 209 213 219;
   --color-accent-start: 110 140 251;
   --color-accent-end: 160 148 255;
@@ -38,12 +38,12 @@ html {
   font-family: 'Inter', system-ui, sans-serif;
 }
 
-body {
-  transition: background-color 150ms ease, color 150ms ease;
+*, *::before, *::after {
+  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  body {
+  *, *::before, *::after {
     transition: none;
   }
 }
