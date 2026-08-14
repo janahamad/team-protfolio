@@ -17,12 +17,12 @@ export default function ProjectsTab({ projects }) {
           to={`/project/${project.id}`}
           className="group bg-surface rounded-2xl border border-subtle overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:border-accent-start/20 transition-all duration-200"
         >
-          <div className="relative h-40 overflow-hidden">
+          <div className="relative h-40 overflow-hidden bg-page">
             {project.image ? (
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
               />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-accent-start to-accent-end flex items-center justify-center">

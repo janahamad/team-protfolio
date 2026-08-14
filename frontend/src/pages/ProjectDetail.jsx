@@ -52,9 +52,9 @@ export default function ProjectDetail() {
         </button>
 
         <div className="bg-surface rounded-[2rem] overflow-hidden shadow-sm border border-subtle">
-          <div className="h-56 sm:h-72 w-full overflow-hidden">
+          <div className="h-56 sm:h-72 w-full overflow-hidden bg-page">
             {project.image ? (
-              <img src={project.image} alt={project.title} className="w-full h-full object-cover" />
+              <img src={project.image} alt={project.title} className="w-full h-full object-contain" />
             ) : (
               <div className="w-full h-full bg-gradient-to-br from-accent-start to-accent-end flex items-center justify-center">
                 <span className="text-6xl font-bold text-white">{project.title.charAt(0)}</span>

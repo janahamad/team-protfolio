@@ -21,7 +21,7 @@ function DiagramThumbnail({ diagram, onSelect }) {
             src={diagram.image}
             alt={diagram.title}
             onError={() => setHasError(true)}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+            className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
           />
         )}
       </div>
